@@ -1,0 +1,24 @@
+{
+  "name": "mk-netflix-consumption",
+  "version": "0.0.0",
+  "description": "MichaelKrukar.com - Netflix consumption data visualization",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Krukar/michaelkrukar.com-media-consumption.git"
+  },
+  "author": "Michael Krukar",
+  "license": "MIT",
+  "readme": "../README.md",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.1",
+    "gulp-typescript": "^2.13.5",
+    "gulp-uglify": "^1.5.3"
+  },
+  "dependencies": {
+    "jquery": "^3.0.0"
+  }
+}

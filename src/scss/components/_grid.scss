@@ -1,0 +1,8 @@
+.listYear{
+	width: 100%;
+	.day{
+		float: left;
+		width: calc(100% /7);
+		padding-top: calc(100% /7);
+	}
+}
