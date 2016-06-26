@@ -7979,7 +7979,7 @@ $(function () {
         var years = endYear - startYear + 1;
         for (var i = 0; i < years; i++) {
             var year = startYear + i;
-            container.append('<div id="year_' + year + '" class="year"><h1>' + year + '</h1><ul class="list"></ul></div>');
+            container.append('<div id="year' + year + '" class="year"><h1>' + year + '</h1><ul class="list"></ul></div>');
             var days = 365;
             if (leapYears.indexOf(year) > 0) {
                 days = 366;
@@ -7988,7 +7988,7 @@ $(function () {
             for (var i_1 = 0; i_1 < days; i_1++) {
                 list += '<li class="day day_' + i_1 + '"></li>';
             }
-            $('#year_' + year + ' .list').append(list);
+            $('#year' + year + ' .list').append(list);
         }
     }
     function injectDates(dates) {
@@ -8002,7 +8002,7 @@ $(function () {
             var doy = Math.floor((end - start) / (1000 * 60 * 60 * 24));
             for (var content in dates[date]) {
                 var self_1 = dates[date][content];
-                $('.day', $('#year_' + year)).eq(doy).addClass(self_1.type);
+                $('.day', $('#year' + year)).eq(doy).addClass(self_1.type);
             }
         }
     }

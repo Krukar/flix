@@ -55,7 +55,7 @@ $(function() {
 		
 		for(let i: number = 0; i < years; i++){
 			let year: number = startYear + i;
-			container.append('<div id="year_' + year + '" class="year"><h1>' + year + '</h1><ul class="list"></ul></div>');
+			container.append('<div id="year' + year + '" class="year"><h1>' + year + '</h1><ul class="list"></ul></div>');
 
 			let days: number = 365;
 			if(leapYears.indexOf(year) > 0){
@@ -67,7 +67,7 @@ $(function() {
 				list += '<li class="day day_' + i + '"></li>';
 			}
 
-			$('#year_' + year + ' .list').append(list);
+			$('#year' + year + ' .list').append(list);
 		}
 	}
 
@@ -85,7 +85,7 @@ $(function() {
 
 			for(let content in dates[date]){
 				let self: any = dates[date][content];
-				$('.day', $('#year_' + year)).eq(doy).addClass(self.type);
+				$('.day', $('#year' + year)).eq(doy).addClass(self.type);
 			}
 		}
 	}
