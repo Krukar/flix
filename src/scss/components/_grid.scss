@@ -1,8 +1,23 @@
-.listYear{
-	width: 100%;
+#lists{
+	.year{
+		width: 25%;
+		float: left;
+	}
+	.list{
+		width: 100%;
+		overflow: hidden;
+	}
 	.day{
 		float: left;
 		width: calc(100% /7);
 		padding-top: calc(100% /7);
+
+		border: solid thin black;
+		&.tv{
+			background: red;
+		}
+		&.movie{
+			background: blue;
+		}
 	}
 }

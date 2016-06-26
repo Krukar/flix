@@ -1,5 +1,16 @@
-
-2016-06-21	Community: Season 1: "Romantic Expressionism"	Report a problem	×
+2016-06-25	Community: Season 2: "Anthropology 101"	Report a problem	×
+2016-06-25	Community: Season 1: "Pascal's Triangle Revisited"	Report a problem	×
+2016-06-25	Community: Season 1: "English as a Second Language"	Report a problem	×
+2016-06-25	Community: Season 1: "Modern Warfare"	Report a problem	×
+2016-06-25	Community: Season 1: "The Art of Discourse"	Report a problem	×
+2016-06-25	Community: Season 1: "Contemporary American Poultry"	Report a problem	×
+2016-06-25	Community: Season 1: "The Science of Illusion"	Report a problem	×
+2016-06-25	Community: Season 1: "Beginner Pottery"	Report a problem	×
+2016-06-23	Community: Season 1: "Basic Genealogy"	Report a problem	×
+2016-06-23	Community: Season 1: "Physical Education"	Report a problem	×
+2016-06-22	Community: Season 1: "Communication Studies"	Report a problem	×
+2016-06-22	Community: Season 1: "Romantic Expressionism"	Report a problem	×
+2016-06-22	Farscape: Season 4: "What Was Lost: Part 1: Sacrifice"	Report a problem	×
 2016-06-21	Community: Season 1: "Interpretive Dance"	Report a problem	×
 2016-06-21	Community: Season 1: "Investigative Journalism"	Report a problem	×
 2016-06-21	Community: Season 1: "Comparative Religion"	Report a problem	×
@@ -553,20 +564,10 @@
 2015-07-12	Farscape: Season 2: "A Clockwork Nebari"	Report a problem	×
 2015-07-10	Community: Season 3: "Digital Estate Planning"	Report a problem	×
 2015-07-10	Community: Season 3: "Regional Holiday Music"	Report a problem	×
-2015-07-10	Community: Season 1: "Pascal's Triangle Revisited"	Report a problem	×
 2015-07-09	Community: Season 2: "Advanced Dungeons and Dragons"	Report a problem	×
 2015-07-09	Farscape: Season 2: "The Ugly Truth"	Report a problem	×
 2015-07-08	Farscape: Season 2: "The Locket"	Report a problem	×
-2015-07-08	Community: Season 1: "English as a Second Language"	Report a problem	×
-2015-07-08	Community: Season 1: "Modern Warfare"	Report a problem	×
-2015-07-08	Community: Season 1: "The Art of Discourse"	Report a problem	×
-2015-07-08	Community: Season 1: "Contemporary American Poultry"	Report a problem	×
-2015-07-08	Community: Season 1: "Basic Genealogy"	Report a problem	×
 2015-07-08	Farscape: Season 2: "Won't Get Fooled Again"	Report a problem	×
-2015-07-08	Community: Season 1: "The Science of Illusion"	Report a problem	×
-2015-07-08	Community: Season 1: "Beginner Pottery"	Report a problem	×
-2015-07-07	Community: Season 1: "Physical Education"	Report a problem	×
-2015-07-07	Community: Season 1: "Communication Studies"	Report a problem	×
 2015-07-07	Farscape: Season 2: "Beware of Dog"	Report a problem	×
 2015-07-07	Farscape: Season 2: "Look at the Princess: Part 3: The Maltese Crichton"	Report a problem	×
 2015-07-07	Farscape: Season 2: "Look at the Princess: Part 2: I Do, I Think"	Report a problem	×
@@ -575,7 +576,6 @@
 2015-06-27	Farscape: Season 2: "My Three Crichtons"	Report a problem	×
 2015-06-25	Community: Season 3: "Biology 101"	Report a problem	×
 2015-06-25	Farscape: Season 2: "Out of Their Minds"	Report a problem	×
-2015-06-25	Community: Season 2: "Anthropology 101"	Report a problem	×
 2015-06-24	Farscape: Season 2: "Dream a Little Dream"	Report a problem	×
 2015-06-24	Community: Season 2: "Basic Rocket Science"	Report a problem	×
 2015-06-24	Community: Season 2: "The Psychology of Letting Go"	Report a problem	×
