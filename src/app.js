@@ -7938,6 +7938,7 @@ $(function () {
     $('#submit').on('click', function () {
         var dates = []; // Our main show object
         var startYear;
+        var endYear;
         var data = $('#textarea').val(); // text area data to parse
         var split = data.match(/[^\r\n]+/g); // split it up by lines
         for (var _i = 0, split_1 = split; _i < split_1.length; _i++) {
@@ -7963,36 +7964,47 @@ $(function () {
                     title: title,
                     type: type
                 };
-                startYear = parseInt(date.substring(0, 4));
+                // We can to calibrate when people started and stopped watching Netflix
+                var year = parseInt(date.substring(0, 4));
+                endYear = endYear === undefined ? year : year >= endYear ? year : endYear;
+                startYear = year;
                 dates[date].push(show);
             }
         }
         ;
-        injectYears(startYear);
+        injectYears(startYear, endYear);
         injectDates(dates);
+        $('.tv, .movie').on('click', function () {
+            // injectPopup($(this).data('contents'));
+        });
     });
-    function injectYears(startYear) {
+    function injectYears(startYear, endYear) {
         var leapYears = [2000, 2004, 2008, 2012, 2016, 2020];
         var container = $('#lists');
-        container.html(''); // Clear the node before inserting in to it
-        var endYear = new Date().getFullYear();
+        container.html('');
         var years = endYear - startYear + 1;
         for (var i = 0; i < years; i++) {
+            var list = '';
             var year = startYear + i;
             container.append('<div id="year' + year + '" class="year"><h1>' + year + '</h1><ul class="list"></ul></div>');
             var days = 365;
             if (leapYears.indexOf(year) > 0) {
                 days = 366;
             }
-            var list = '';
-            for (var i_1 = 0; i_1 < days; i_1++) {
-                list += '<li class="day day_' + i_1 + '"></li>';
+            var offset = (new Date(year, 0, 1).getDay()) - 1;
+            for (var i_1 = 0; i_1 < offset; i_1++) {
+                list += '<li class="offset"></li>';
+            }
+            for (var i_2 = 0; i_2 < days; i_2++) {
+                list += '<li class="day day_' + i_2 + '"></li>';
             }
             $('#year' + year + ' .list').append(list);
         }
     }
     function injectDates(dates) {
+        var max = getMax(dates);
         for (var date in dates) {
+            var opacity = Math.round((dates[date].length / max * 100) / 10) * 10;
             var regx = date.match(/(20\d{2})-(\d{2})-(\d{2})/);
             var year = parseInt(regx[1]);
             var month = parseInt(regx[2]) - 1;
@@ -8000,11 +8012,24 @@ $(function () {
             var start = new Date(year, 0, 1);
             var end = new Date(year, month, day);
             var doy = Math.floor((end - start) / (1000 * 60 * 60 * 24));
+            var node = $('.day', $('#year' + year)).eq(doy);
+            node.data('contents', dates[date]);
             for (var content in dates[date]) {
                 var self_1 = dates[date][content];
-                $('.day', $('#year' + year)).eq(doy).addClass(self_1.type);
+                node.addClass(self_1.type + ' opacity' + opacity);
             }
         }
+    }
+    function injectPopup(contents) {
+        for (var content in contents) {
+        }
+    }
+    function getMax(dates) {
+        var max = 0;
+        for (var date in dates) {
+            max = dates[date].length > max ? dates[date].length : max;
+        }
+        return max;
     }
 });
 console.log('main.ts');

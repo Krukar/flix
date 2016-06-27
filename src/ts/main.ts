@@ -4,91 +4,125 @@
 $(function() {
 
 	// On submit
-	$('#submit').on('click', function(){
-		let dates: any = []; // Our main show object
-		let startYear: number;
+    $('#submit').on('click', function() {
+        let dates: any = []; // Our main show object
+        let startYear: number;
+        let endYear: number;
 
-		let data: string = $('#textarea').val(); // text area data to parse
-		let split: string[] = data.match(/[^\r\n]+/g); // split it up by lines
+        let data: string = $('#textarea').val(); // text area data to parse
+        let split: string[] = data.match(/[^\r\n]+/g); // split it up by lines
 
-		for(let line of split){
-			let regx: any = line.match(/(20\d{2}-\d{2}-\d{2})(.+?(?=Report a problem))/);
-			// if the regx got no results
-			if(regx){
-				let date: string = regx[1].trim();
-				let title: string = regx[2].trim();
+        for (let line of split) {
+            let regx: any = line.match(/(20\d{2}-\d{2}-\d{2})(.+?(?=Report a problem))/);
+            // if the regx got no results
+            if (regx) {
+                let date: string = regx[1].trim();
+                let title: string = regx[2].trim();
 
-				let type: string;
-				if (title.match(/Season/g)) {
-					type = 'tv';
-				}
-				else {
-					type = 'movie';
-				}
+                let type: string;
+                if (title.match(/Season/g)) {
+                    type = 'tv';
+                } else {
+                    type = 'movie';
+                }
 
-				if (dates[date] == null) {
-					dates[date] = [];
-				};
+                if (dates[date] == null) {
+                    dates[date] = [];
+                };
 
-				let show: any = {
-					date: date,
-					title: title,
-					type: type
-				};
+                let show: {
+                    [key: string]: string
+                } = {
+                    date: date,
+                    title: title,
+                    type: type
+                };
 
-				startYear = parseInt(date.substring(0, 4));
+                // We can to calibrate when people started and stopped watching Netflix
+                let year: number = parseInt(date.substring(0, 4));
+                endYear = endYear === undefined ? year : year >= endYear ? year : endYear;
+                startYear = year;
 
-				dates[date].push(show);	
-			}			
-		};
+                dates[date].push(show);
+            }
+        };
 
-		injectYears(startYear);
-		injectDates(dates);
-	});
+        injectYears(startYear, endYear);
+        injectDates(dates);
 
-	function injectYears(startYear: number){
-		let leapYears: number[] = [2000, 2004, 2008, 2012, 2016, 2020];
-		let container: any = $('#lists');
-		container.html(''); // Clear the node before inserting in to it
-		let endYear: number = new Date().getFullYear();
-		let years: number = endYear - startYear + 1;
-		
-		for(let i: number = 0; i < years; i++){
-			let year: number = startYear + i;
-			container.append('<div id="year' + year + '" class="year"><h1>' + year + '</h1><ul class="list"></ul></div>');
+        $('.tv, .movie').on('click', function() {
+            // injectPopup($(this).data('contents'));
+        });
 
-			let days: number = 365;
-			if(leapYears.indexOf(year) > 0){
-				days = 366;
-			}
+    });
 
-			let list: string = '';
-			for(let i: number = 0; i < days; i++){
-				list += '<li class="day day_' + i + '"></li>';
-			}
+    function injectYears(startYear: number, endYear: number) {
+        let leapYears: number[] = [2000, 2004, 2008, 2012, 2016, 2020];
+        let container: any = $('#lists');
+        container.html('');
+        let years: number = endYear - startYear + 1;
 
-			$('#year' + year + ' .list').append(list);
-		}
-	}
+        for (let i: number = 0; i < years; i++) {
+            let list: string = '';
 
-	function injectDates(dates: any){
-		for(let date in dates){
-			let regx: any = date.match(/(20\d{2})-(\d{2})-(\d{2})/);
-			let year: number = parseInt(regx[1]);
-			let month: number = parseInt(regx[2]) - 1;
-			let day: number = parseInt(regx[3]);
+            let year: number = startYear + i;
+            container.append('<div id="year' + year + '" class="year"><h1>' + year + '</h1><ul class="list"></ul></div>');
 
-			let start: any = new Date(year, 0, 1);
-			let end: any = new Date(year, month, day);
+            let days: number = 365;
+            if (leapYears.indexOf(year) > 0) {
+                days = 366;
+            }
 
-			let doy: number = Math.floor((end - start) / (1000 * 60 * 60 * 24));
+            let offset: number = (new Date(year, 0, 1).getDay()) - 1;
+            for (let i: number = 0; i < offset; i++) {
+                list += '<li class="offset"></li>';
+            }
 
-			for(let content in dates[date]){
-				let self: any = dates[date][content];
-				$('.day', $('#year' + year)).eq(doy).addClass(self.type);
-			}
-		}
-	}
-}); 
+            for (let i: number = 0; i < days; i++) {
+                list += '<li class="day day_' + i + '"></li>';
+            }
 
-console.log('main.ts');   
+            $('#year' + year + ' .list').append(list);
+        }
+    }
+
+    function injectDates(dates: any) {
+        let max: number = getMax(dates);
+
+        for (let date in dates) {
+            let opacity: number = Math.round((dates[date].length / max * 100) / 10) * 10;
+            let regx: any = date.match(/(20\d{2})-(\d{2})-(\d{2})/);
+            let year: number = parseInt(regx[1]);
+            let month: number = parseInt(regx[2]) - 1;
+            let day: number = parseInt(regx[3]);
+
+            let start: any = new Date(year, 0, 1);
+            let end: any = new Date(year, month, day);
+
+            let doy: number = Math.floor((end - start) / (1000 * 60 * 60 * 24));
+            let node: any = $('.day', $('#year' + year)).eq(doy);
+            node.data('contents', dates[date]);
+
+            for (let content in dates[date]) {
+                let self: any = dates[date][content];
+                node.addClass(self.type + ' opacity' + opacity);
+            }
+        }
+    }
+
+    function injectPopup(contents: any){
+    	for(let content in contents){
+    		// $('<div class="popup">popup</div>').appendTo('#popups').fadeIn().delay(1000).fadeOut('slow');
+    	}
+    }
+
+    function getMax(dates: any) {
+        let max: number = 0;
+        for (let date in dates) {
+            max = dates[date].length > max ? dates[date].length : max;
+        }
+        return max;
+    }
+});
+
+console.log('main.ts');

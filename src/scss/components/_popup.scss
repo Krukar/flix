@@ -1,0 +1,16 @@
+#popups{
+	position: fixed;
+	top: 1rem;
+	right: 1rem;
+
+	z-index: 20;
+	.popup{
+		margin-bottom: 1rem;
+		padding: 0.25rem 0.75rem;
+
+		border-radius: 0.125rem;
+
+		background:$black;
+		color: $white;
+	}
+}

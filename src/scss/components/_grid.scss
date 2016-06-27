@@ -1,8 +1,11 @@
 #lists{
+	overflow: hidden;
 	.year{
 		width: 100%;
 		float: left;
 		padding: 0 2rem;
+
+		text-align: center;
 		@media(min-width: $medium){
 			width: 50%;
 		}
@@ -12,69 +15,60 @@
 	}
 	.list{
 		width: 100%;
-		overflow: hidden;
 	}
-	.day{
+	.offset, .day{
 		float: left;
 		width: calc(100% /7);
 		padding-top: calc(100% /7);
-
-		border-left: solid thin black;
-		border-bottom: solid thin black;
-		border-right: solid thin black;
+		border-bottom: solid thin $grey;
+	}
+	.tv, .movie, .tv.movie{
+		position: relative;
+		cursor: pointer;
+	}
+	.day{	
+		border-left: solid thin $grey;	
+		@include tran();
 		&.tv{
-			background: red;
+			&.opacity10{ background: rgba($blue, 0.1); }
+			&.opacity20{ background: rgba($blue, 0.2); }
+			&.opacity30{ background: rgba($blue, 0.3); }
+			&.opacity40{ background: rgba($blue, 0.4); }
+			&.opacity50{ background: rgba($blue, 0.5); }
+			&.opacity60{ background: rgba($blue, 0.6); }
+			&.opacity70{ background: rgba($blue, 0.7); }
+			&.opacity80{ background: rgba($blue, 0.8); }
+			&.opacity90{ background: rgba($blue, 0.9); }
+			&:hover, &.opacity100{ background: rgba($blue, 1); }
 		}
 		&.movie{
-			background: blue;
+			&.opacity10{ background: rgba($red, 0.1); }
+			&.opacity20{ background: rgba($red, 0.2); }
+			&.opacity30{ background: rgba($red, 0.3); }
+			&.opacity40{ background: rgba($red, 0.4); }
+			&.opacity50{ background: rgba($red, 0.5); }
+			&.opacity60{ background: rgba($red, 0.6); }
+			&.opacity70{ background: rgba($red, 0.7); }
+			&.opacity80{ background: rgba($red, 0.8); }
+			&.opacity90{ background: rgba($red, 0.9); }
+			&:hover, &.opacity100{ background: rgba($red, 1); }
+		}
+		&.tv.movie{
+			&.opacity10{ background: rgba($purple, 0.1); }
+			&.opacity20{ background: rgba($purple, 0.2); }
+			&.opacity30{ background: rgba($purple, 0.3); }
+			&.opacity40{ background: rgba($purple, 0.4); }
+			&.opacity50{ background: rgba($purple, 0.5); }
+			&.opacity60{ background: rgba($purple, 0.6); }
+			&.opacity70{ background: rgba($purple, 0.7); }
+			&.opacity80{ background: rgba($purple, 0.8); }
+			&.opacity90{ background: rgba($purple, 0.9); }
+			&:hover, &.opacity100{ background: rgba($purple, 1); }
 		}
 	}
-}
-
-#year2012, #year2006{
-	.list{
-		.day:first-child{
-			margin-left: calc(100% / 7 * 6);
-		}
-	}
-}
-
-#year2011{
-	.list{
-		.day:first-child{
-			margin-left: calc(100% / 7 * 5);
-		}
-	}
-}
-
-#year2016, #year2010{
-	.list{
-		.day:first-child{
-			margin-left: calc(100% / 7 * 4);
-		}
-	}
-}
-
-#year2015, #year2009{
-	.list{
-		.day:first-child{
-			margin-left: calc(100% / 7 * 3);
-		}
-	}
-}
-
-#year2014{
-	.list{
-		.day:first-child{
-			margin-left: calc(100% / 7 * 2);
-		}
-	}
-}
-
-#year2013, #year2008{
-	.list{
-		.day:first-child{
-			margin-left: calc(100% / 7);
+	li{
+		&:nth-child(7n+1){
+			border-left: 0;
 		}
 	}
 }

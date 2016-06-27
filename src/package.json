@@ -1,10 +1,10 @@
 {
-  "name": "mk-netflix-consumption",
+  "name": "netflix-consumption",
   "version": "0.0.0",
   "description": "MichaelKrukar.com - Netflix consumption data visualization",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Krukar/michaelkrukar.com-media-consumption.git"
+    "url": "git+https://github.com/Krukar/netflix-consumption"
   },
   "author": "Michael Krukar",
   "license": "MIT",
