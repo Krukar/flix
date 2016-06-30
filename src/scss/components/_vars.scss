@@ -6,9 +6,13 @@ $grey: #95a5a6;;
 $black: #2c3e50;
 
 $red: #e74c3c;
+$redAlt: #c0392b;
 $green: #2ecc71;
+$greenAlt: #27ae60;
 $blue: #3498db;
+$blueAlt: #2980b9;
 $purple: #9b59b6;
+$purpleAlt: #8e44ad;
 
 @mixin tran(){
 	-webkit-transition: all 0.5s cubic-bezier(0, 0, 0.5, 1);

@@ -16,7 +16,7 @@ $(function () {
                 var date = regx[1].trim();
                 var title = regx[2].trim();
                 var type = void 0;
-                if (title.match(/Season/g)) {
+                if (title.match(/Season/g) || title.match(/The Complete Series/g)) {
                     type = 'tv';
                 }
                 else {
@@ -42,7 +42,7 @@ $(function () {
         injectYears(startYear, endYear);
         injectDates(dates);
         $('.tv, .movie').on('click', function () {
-            // injectPopup($(this).data('contents'));
+            injectPopups($(this).data('contents'));
         });
     });
     function injectYears(startYear, endYear) {
@@ -87,8 +87,24 @@ $(function () {
             }
         }
     }
-    function injectPopup(contents) {
+    function injectPopups(contents) {
+        var i = 0;
+        var _loop_1 = function(content) {
+            var offset = 250 * i;
+            i++;
+            var node = $('<div class="popup"><div class="info ' + contents[content].type + '"><span class="type">' + contents[content].type + '</span> - ' + contents[content].title + '</div></div>');
+            node.hide().prependTo('#popups').on('click', function () {
+                node.remove();
+            }).fadeIn(500, 'swing');
+            setTimeout(function () {
+                node.fadeOut(500, 'swing');
+                setTimeout(function () {
+                    node.remove();
+                }, 500);
+            }, 3000 + offset);
+        };
         for (var content in contents) {
+            _loop_1(content);
         }
     }
     function getMax(dates) {

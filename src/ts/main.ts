@@ -3,7 +3,7 @@
 
 $(function() {
 
-	// On submit
+    // On submit
     $('#submit').on('click', function() {
         let dates: any = []; // Our main show object
         let startYear: number;
@@ -20,7 +20,7 @@ $(function() {
                 let title: string = regx[2].trim();
 
                 let type: string;
-                if (title.match(/Season/g)) {
+                if (title.match(/Season/g) || title.match(/The Complete Series/g)) {
                     type = 'tv';
                 } else {
                     type = 'movie';
@@ -51,7 +51,7 @@ $(function() {
         injectDates(dates);
 
         $('.tv, .movie').on('click', function() {
-            // injectPopup($(this).data('contents'));
+            injectPopups($(this).data('contents'));
         });
 
     });
@@ -110,10 +110,28 @@ $(function() {
         }
     }
 
-    function injectPopup(contents: any){
-    	for(let content in contents){
-    		// $('<div class="popup">popup</div>').appendTo('#popups').fadeIn().delay(1000).fadeOut('slow');
-    	}
+    function injectPopups(contents: any) {
+        let i: number = 0;
+        for (let content in contents) {
+            let offset: number = 250 * i;
+            i++;
+
+            let node: any = $('<div class="popup"><div class="info ' + contents[content].type + '"><span class="type">' + contents[content].type + '</span> - ' + contents[content].title + '</div></div>');
+
+            node.hide().prependTo('#popups').on('click', function() {
+                node.remove();
+            }).fadeIn(500, 'swing');
+
+            setTimeout(function() {
+                node.fadeOut(500, 'swing');
+
+                setTimeout(function() {
+                    node.remove();
+                }, 500);
+
+            }, 3000 + offset);
+
+        }
     }
 
     function getMax(dates: any) {

@@ -33,7 +33,7 @@ gulp.task('ts', function () {
 
 // Compile JS
 gulp.task('js', ['ts'], function() {
-	return gulp.src(['./node_modules/jquery/dist/jquery.slim.js',
+	return gulp.src(['./node_modules/jquery/dist/jquery.min.js',
 		'js/main.js'])
 	.pipe(concat('app.js'))
 	.pipe(gulp.dest('./'));

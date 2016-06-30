@@ -4,13 +4,30 @@
 	right: 1rem;
 
 	z-index: 20;
+
+	text-align: right;
 	.popup{
 		margin-bottom: 1rem;
-		padding: 0.25rem 0.75rem;
 
-		border-radius: 0.125rem;
-
-		background:$black;
 		color: $white;
+
+		cursor: pointer;
+		.info{
+			display: inline;
+			padding: 0.25rem 0.75rem;
+
+			border-radius: 0.125rem;
+			&.tv{
+				background: $blueAlt;
+			}
+			&.movie{
+				background: $redAlt;
+			}
+		}
+	}
+	.type{
+		font-weight: bold;
+
+		text-transform: uppercase;
 	}
 }
