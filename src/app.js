@@ -6,21 +6,31 @@ return j.call(r(a),c)})),b))for(;i>h;h++)b(a[h],c,g?d:d.call(a[h],h,b(a[h],c)));
 ///<reference path="d/jquery.d.ts" />
 'use strict';
 $(function () {
-    // On submit
+    var dates = {};
+    // Injecting my data
+    $('#krukar').on('click', function () {
+        $.getJSON('data.json', function (data) {
+            dates = data;
+            injectYears(2013, 2016);
+            injectDates(dates);
+            $('.tv, .movie').on('click', function () {
+                injectPopups($(this).data('contents'));
+            });
+        });
+    });
     $('#submit').on('click', function () {
-        var dates = []; // Our main show object
-        var startYear;
-        var endYear;
-        var data = $('#textarea').val(); // text area data to parse
-        var split = data.match(/[^\r\n]+/g); // split it up by lines
+        dates = {};
+        var startYear; // Year user started using Netflix
+        var endYear; // Year user stopped using Netflix
+        var data = $('#textarea').val();
+        var split = data.match(/[^\r\n]+/g); // Split the viewing activity by lines
         for (var _i = 0, split_1 = split; _i < split_1.length; _i++) {
             var line = split_1[_i];
-            var regx = line.match(/(20\d{2}-\d{2}-\d{2})(.+?(?=Report a problem))/);
-            // if the regx got no results
+            var regx = line.match(/(20\d{2}-\d{2}-\d{2})(.+?(?=Report a problem))/); // Parse the line
             if (regx) {
                 var date = regx[1].trim();
                 var title = regx[2].trim();
-                var type = void 0;
+                var type = void 0; // If it contains Season or The Complete Series it has to be a TV show. Sounds unreliable but it's not
                 if (title.match(/Season/g) || title.match(/The Complete Series/g)) {
                     type = 'tv';
                 }
@@ -36,7 +46,6 @@ $(function () {
                     title: title,
                     type: type
                 };
-                // We can to calibrate when people started and stopped watching Netflix
                 var year = parseInt(date.substring(0, 4));
                 endYear = endYear === undefined ? year : year >= endYear ? year : endYear;
                 startYear = year;
@@ -50,6 +59,7 @@ $(function () {
             injectPopups($(this).data('contents'));
         });
     });
+    // Add lists
     function injectYears(startYear, endYear) {
         var leapYears = [2000, 2004, 2008, 2012, 2016, 2020];
         var container = $('#lists');
@@ -73,6 +83,7 @@ $(function () {
             $('#year' + year + ' .list').append(list);
         }
     }
+    // Add the actual viewed dates
     function injectDates(dates) {
         var max = getMax(dates);
         for (var date in dates) {

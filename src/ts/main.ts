@@ -2,24 +2,37 @@
 'use strict';
 
 $(function() {
+    let dates: any = {};
 
-    // On submit
+    // Injecting my data
+    $('#krukar').on('click', function() {
+        $.getJSON( 'data.json', function(data: any) {
+            dates = data;
+
+            injectYears(2013, 2016);
+            injectDates(dates);
+
+            $('.tv, .movie').on('click', function() {
+                injectPopups($(this).data('contents'));
+            });            
+        });        
+    });
+
     $('#submit').on('click', function() {
-        let dates: any = []; // Our main show object
-        let startYear: number;
-        let endYear: number;
+        dates = {};
+        let startYear: number; // Year user started using Netflix
+        let endYear: number; // Year user stopped using Netflix
 
-        let data: string = $('#textarea').val(); // text area data to parse
-        let split: string[] = data.match(/[^\r\n]+/g); // split it up by lines
+        let data: string = $('#textarea').val();
+        let split: string[] = data.match(/[^\r\n]+/g); // Split the viewing activity by lines
 
         for (let line of split) {
-            let regx: any = line.match(/(20\d{2}-\d{2}-\d{2})(.+?(?=Report a problem))/);
-            // if the regx got no results
+            let regx: any = line.match(/(20\d{2}-\d{2}-\d{2})(.+?(?=Report a problem))/); // Parse the line
             if (regx) {
                 let date: string = regx[1].trim();
                 let title: string = regx[2].trim();
 
-                let type: string;
+                let type: string; // If it contains Season or The Complete Series it has to be a TV show. Sounds unreliable but it's not
                 if (title.match(/Season/g) || title.match(/The Complete Series/g)) {
                     type = 'tv';
                 } else {
@@ -30,15 +43,12 @@ $(function() {
                     dates[date] = [];
                 };
 
-                let show: {
-                    [key: string]: string
-                } = {
+                let show: { [key: string]: string } = {
                     date: date,
                     title: title,
                     type: type
                 };
 
-                // We can to calibrate when people started and stopped watching Netflix
                 let year: number = parseInt(date.substring(0, 4));
                 endYear = endYear === undefined ? year : year >= endYear ? year : endYear;
                 startYear = year;
@@ -53,9 +63,9 @@ $(function() {
         $('.tv, .movie').on('click', function() {
             injectPopups($(this).data('contents'));
         });
-
     });
 
+    // Add lists
     function injectYears(startYear: number, endYear: number) {
         let leapYears: number[] = [2000, 2004, 2008, 2012, 2016, 2020];
         let container: any = $('#lists');
@@ -86,6 +96,7 @@ $(function() {
         }
     }
 
+    // Add the actual viewed dates
     function injectDates(dates: any) {
         let max: number = getMax(dates);
 
@@ -142,5 +153,4 @@ $(function() {
         return max;
     }
 });
-
 console.log('main.ts');

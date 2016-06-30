@@ -1,0 +1,30 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+body{
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
+	line-height: 1.2;
+}
+
+p{
+	margin: 1rem 0;
+}
+
+a{
+	color: $blue;
+
+	cursor: pointer;
+	text-decoration: none;
+	@include tran();
+	&:hover{
+		color: $blueAlt;
+	}
+}
+
+h1, h2, h3{
+	margin: 0 0 1.5rem;
+}
+
+h1{
+	text-transform: uppercase;
+}
